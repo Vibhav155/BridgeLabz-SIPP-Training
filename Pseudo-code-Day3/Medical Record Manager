@@ -1,0 +1,42 @@
+interface Searchable {
+    boolean search(String keyword);
+}
+interface Printable {
+    void print();
+}
+class PatientReport implements Searchable, Printable {
+    String patientName;
+    String disease;
+
+    boolean search(String keyword) {
+        return patientName.contains(keyword) || disease.contains(keyword);
+    }
+
+    void print() {
+        print("Patient Report: " + patientName + " - Disease: " + disease);
+    }
+}
+class DoctorReport implements Searchable, Printable {
+    String doctorName;
+    String specialization;
+
+    boolean search(String keyword) {
+        return doctorName.contains(keyword) || specialization.contains(keyword);
+    }
+
+    void print() {
+        print("Doctor Report: " + doctorName + " - Specialization: " + specialization);
+    }
+}
+class MedicalRecordManager {
+    public static void main(String[] args) {
+        Printable report1 = new PatientReport("Rahul", "Flu");
+        Printable report2 = new DoctorReport("Dr. Mehta", "Cardiology");
+
+        report1.print();   // Polymorphism
+        report2.print();
+
+        Searchable s1 = (Searchable) report1;
+        print("Search Flu: " + s1.search("Flu")); // true
+    }
+}
