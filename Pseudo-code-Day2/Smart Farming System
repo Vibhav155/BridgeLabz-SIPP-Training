@@ -1,0 +1,25 @@
+Abstract Class Crop
+    Attribute name : String
+    Abstract Method waterRequirement()
+    Abstract Method harvestTime()
+
+Class Rice extends Crop
+    Method waterRequirement()
+        return "High water needed (e.g., 1200mm)"
+    Method harvestTime()
+        return "4 months"
+
+Class Wheat extends Crop
+    Method waterRequirement()
+        return "Moderate water needed (e.g., 600mm)"
+    Method harvestTime()
+        return "6 months"
+
+Main
+    Create crop1 = new Rice()
+    print "Rice Water Requirement: " + crop1.waterRequirement()
+    print "Rice Harvest Time: " + crop1.harvestTime()
+
+    Create crop2 = new Wheat()
+    print "Wheat Water Requirement: " + crop2.waterRequirement()
+    print "Wheat Harvest Time: " + crop2.harvestTime()
