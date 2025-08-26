@@ -1,0 +1,41 @@
+class Customer {
+    String name;
+    String address;
+    String phone;
+}
+
+class Restaurant {
+    String name;
+    String location;
+    String[] menu;
+}
+
+class DeliveryBoy {
+    String name;
+    String vehicleNumber;
+}
+
+class Order {
+    Customer customer;         
+    Restaurant restaurant;     
+    DeliveryBoy deliveryBoy;   
+    String foodItem;
+    double price;
+
+    void placeOrder() {
+        print("Order placed by " + customer.name + 
+              " from " + restaurant.name +
+              " delivered by " + deliveryBoy.name);
+    }
+}
+
+class FoodDeliverySystem {
+    public static void main(String[] args) {
+        Customer c = new Customer("Amit", "Delhi", "9876543210");
+        Restaurant r = new Restaurant("PizzaHub", "Noida", ["Pizza", "Burger"]);
+        DeliveryBoy d = new DeliveryBoy("Rohit", "UP32AB1234");
+
+        Order order = new Order(c, r, d, "Pizza", 299.0);
+        order.placeOrder();
+    }
+}
