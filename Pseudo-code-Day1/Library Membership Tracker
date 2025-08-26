@@ -1,0 +1,11 @@
+
+CLASS Member
+    ATTRIBUTES: name, memberId, membershipDate, expiryDate
+    CONSTRUCTOR(name, memberId, membershipDate, expiryDate)
+        ASSIGN values
+    METHOD checkValidity(currentDate)
+        IF currentDate <= expiryDate
+            PRINT "Membership Active"
+        ELSE
+            PRINT "Membership Expired"
+
