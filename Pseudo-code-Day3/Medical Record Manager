@@ -1,42 +1,30 @@
-interface Searchable {
-    boolean search(String keyword);
-}
-interface Printable {
-    void print();
-}
-class PatientReport implements Searchable, Printable {
-    String patientName;
-    String disease;
+INTERFACE Searchable
+    METHOD search(keyword) → returns boolean
 
-    boolean search(String keyword) {
-        return patientName.contains(keyword) || disease.contains(keyword);
-    }
+INTERFACE Printable
+    METHOD print()
 
-    void print() {
-        print("Patient Report: " + patientName + " - Disease: " + disease);
-    }
-}
-class DoctorReport implements Searchable, Printable {
-    String doctorName;
-    String specialization;
+CLASS PatientReport IMPLEMENTS Searchable, Printable
+    ATTRIBUTES: patientName, disease
+    METHOD search(keyword)
+        RETURN keyword IN patientName OR keyword IN disease
+    METHOD print()
+        PRINT "Patient Report: " + patientName + " | Disease: " + disease
 
-    boolean search(String keyword) {
-        return doctorName.contains(keyword) || specialization.contains(keyword);
-    }
+CLASS DoctorReport IMPLEMENTS Searchable, Printable
+    ATTRIBUTES: doctorName, specialization
+    METHOD search(keyword)
+        RETURN keyword IN doctorName OR keyword IN specialization
+    METHOD print()
+        PRINT "Doctor Report: " + doctorName + " | Specialization: " + specialization
 
-    void print() {
-        print("Doctor Report: " + doctorName + " - Specialization: " + specialization);
-    }
-}
-class MedicalRecordManager {
-    public static void main(String[] args) {
-        Printable report1 = new PatientReport("Rahul", "Flu");
-        Printable report2 = new DoctorReport("Dr. Mehta", "Cardiology");
+MAIN PROGRAM
+    report1 = PatientReport("Rahul", "Flu")
+    report2 = DoctorReport("Dr. Mehta", "Cardiology")
 
-        report1.print();   // Polymorphism
-        report2.print();
+    report1.print()   // Polymorphism: Printable reference
+    report2.print()
 
-        Searchable s1 = (Searchable) report1;
-        print("Search Flu: " + s1.search("Flu")); // true
-    }
-}
+    IF report1.search("Flu") THEN
+        PRINT "Match found in Patient Report"
+    ENDIF
