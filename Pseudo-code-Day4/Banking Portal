@@ -1,0 +1,56 @@
+class Account {
+    String accountHolder;
+    double balance;
+
+    void deposit(double amount) {
+        balance += amount;
+        print("Deposited: " + amount + " | Balance: " + balance);
+    }
+
+    void withdraw(double amount) {
+        if (balance >= amount) {
+            balance -= amount;
+            print("Withdrawn: " + amount + " | Balance: " + balance);
+        } else {
+            print("Insufficient balance!");
+        }
+    }
+}
+
+class SavingAccount extends Account {
+    double minBalance = 1000;
+
+    @Override
+    void withdraw(double amount) {
+        if (balance - amount >= minBalance) {
+            balance -= amount;
+            print("Saving Withdrawn: " + amount + " | Balance: " + balance);
+        } else {
+            print("Cannot withdraw! Minimum balance of " + minBalance + " required.");
+        }
+    }
+}
+
+class CurrentAccount extends Account {
+    double overdraftLimit = -5000;
+
+    @Override
+    void withdraw(double amount) {
+        if (balance - amount >= overdraftLimit) {
+            balance -= amount;
+            print("Current Withdrawn: " + amount + " | Balance: " + balance);
+        } else {
+            print("Overdraft limit exceeded!");
+        }
+    }
+}
+
+class BankingPortal {
+    public static void main(String[] args) {
+        Account s = new SavingAccount("Amit", 5000);
+        Account c = new CurrentAccount("Rohit", 2000);
+
+        s.withdraw(4500);   // ❌ Not allowed due to min balance
+        c.withdraw(6000);   // ✅ Allowed till overdraft -5000
+    }
+}
