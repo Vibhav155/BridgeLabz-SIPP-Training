@@ -1,30 +1,24 @@
 INTERFACE Searchable
     METHOD search(keyword) → returns boolean
-
 INTERFACE Printable
     METHOD print()
-
 CLASS PatientReport IMPLEMENTS Searchable, Printable
     ATTRIBUTES: patientName, disease
     METHOD search(keyword)
         RETURN keyword IN patientName OR keyword IN disease
     METHOD print()
         PRINT "Patient Report: " + patientName + " | Disease: " + disease
-
 CLASS DoctorReport IMPLEMENTS Searchable, Printable
     ATTRIBUTES: doctorName, specialization
     METHOD search(keyword)
         RETURN keyword IN doctorName OR keyword IN specialization
     METHOD print()
         PRINT "Doctor Report: " + doctorName + " | Specialization: " + specialization
-
 MAIN PROGRAM
     report1 = PatientReport("Rahul", "Flu")
     report2 = DoctorReport("Dr. Mehta", "Cardiology")
-
     report1.print()   // Polymorphism: Printable reference
     report2.print()
-
     IF report1.search("Flu") THEN
         PRINT "Match found in Patient Report"
     ENDIF
