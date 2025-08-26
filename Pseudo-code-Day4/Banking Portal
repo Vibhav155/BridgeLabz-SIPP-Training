@@ -1,56 +1,37 @@
-class Account {
-    String accountHolder;
-    double balance;
+CLASS Account
+    ATTRIBUTES: accountHolder, balance
+    METHOD deposit(amount)
+        balance += amount
+        PRINT "Deposited: " + amount + " | Balance: " + balance
 
-    void deposit(double amount) {
-        balance += amount;
-        print("Deposited: " + amount + " | Balance: " + balance);
-    }
+    METHOD withdraw(amount)
+        IF balance >= amount
+            balance -= amount
+            PRINT "Withdrawn: " + amount + " | Balance: " + balance
+        ELSE
+            PRINT "Insufficient balance!"
 
-    void withdraw(double amount) {
-        if (balance >= amount) {
-            balance -= amount;
-            print("Withdrawn: " + amount + " | Balance: " + balance);
-        } else {
-            print("Insufficient balance!");
-        }
-    }
-}
+CLASS SavingAccount EXTENDS Account
+    ATTRIBUTE minBalance = 1000
+    METHOD withdraw(amount)   
+        IF balance - amount >= minBalance
+            balance -= amount
+            PRINT "Saving Withdrawn: " + amount + " | Balance: " + balance
+        ELSE
+            PRINT "Cannot withdraw! Maintain minimum balance: " + minBalance
 
-class SavingAccount extends Account {
-    double minBalance = 1000;
+CLASS CurrentAccount EXTENDS Account
+    ATTRIBUTE overdraftLimit = -5000
+    METHOD withdraw(amount)   
+        IF balance - amount >= overdraftLimit
+            balance -= amount
+            PRINT "Current Withdrawn: " + amount + " | Balance: " + balance
+        ELSE
+            PRINT "Overdraft limit exceeded!"
 
-    @Override
-    void withdraw(double amount) {
-        if (balance - amount >= minBalance) {
-            balance -= amount;
-            print("Saving Withdrawn: " + amount + " | Balance: " + balance);
-        } else {
-            print("Cannot withdraw! Minimum balance of " + minBalance + " required.");
-        }
-    }
-}
+MAIN PROGRAM
+    CREATE savingAcc = SavingAccount("Amit", 5000)
+    CREATE currentAcc = CurrentAccount("Rohit", 2000)
 
-class CurrentAccount extends Account {
-    double overdraftLimit = -5000;
-
-    @Override
-    void withdraw(double amount) {
-        if (balance - amount >= overdraftLimit) {
-            balance -= amount;
-            print("Current Withdrawn: " + amount + " | Balance: " + balance);
-        } else {
-            print("Overdraft limit exceeded!");
-        }
-    }
-}
-
-class BankingPortal {
-    public static void main(String[] args) {
-        Account s = new SavingAccount("Amit", 5000);
-        Account c = new CurrentAccount("Rohit", 2000);
-
-        s.withdraw(4500);   // ❌ Not allowed due to min balance
-        c.withdraw(6000);   // ✅ Allowed till overdraft -5000
-    }
-}
+    savingAcc.withdraw(4500) 
+    currentAcc.withdraw(6000) 
