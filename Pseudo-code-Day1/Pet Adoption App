@@ -1,0 +1,32 @@
+
+CLASS Pet
+    ATTRIBUTES: name, age
+    CONSTRUCTOR(name, age)
+        this.name = name
+        this.age = age
+    METHOD displayInfo()
+        PRINT name + " (" + age + " years old)"
+
+CLASS Dog EXTENDS Pet
+    ATTRIBUTE: breed
+    CONSTRUCTOR(name, age, breed)
+        CALL super(name, age)
+        this.breed = breed
+    METHOD displayInfo()
+        PRINT "Dog: " + name + ", Breed: " + breed
+
+CLASS Cat EXTENDS Pet
+    ATTRIBUTE: color
+    CONSTRUCTOR(name, age, color)
+        CALL super(name, age)
+        this.color = color
+    METHOD displayInfo()
+        PRINT "Cat: " + name + ", Color: " + color
+
+CLASS Bird EXTENDS Pet
+    ATTRIBUTE: canFly
+    CONSTRUCTOR(name, age, canFly)
+        CALL super(name, age)
+        this.canFly = canFly
+    METHOD displayInfo()
+        PRINT "Bird: " + name + ", Can fly: " + canFly
