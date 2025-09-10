@@ -8,4 +8,3 @@ public class Question7 {
 
         System.out.println("Is the first number the smallest? " + (a < b && a < c));
     }
-}
